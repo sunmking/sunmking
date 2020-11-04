@@ -2,15 +2,6 @@
 <h3 align="center">👋 Hello! I'm Clyde-cn.</h3>
 <h5 align="center">Keep calm and coding.</p>
 <p align="center">🇨🇳 China Shanghai・🕹Web developer</p>
-<p align="center">
-<a href="https://baoshuo.ren">Website</a>&nbsp;•&nbsp;
-<a href="https://baoshuo.blog">Blog</a>&nbsp;•&nbsp;
-<a href="https://twitter.com/renbaoshuo">Twitter</a>&nbsp;•&nbsp;
-<a href="https://github.com/renbaoshuo">GitHub</a>&nbsp;•&nbsp;
-<a href="https://gitee.com/renbaoshuo">Gitee</a>&nbsp;•&nbsp;
-<a href="https://t.me/baoshuo">Telegram</a>&nbsp;•&nbsp;
-<a href="https://baoshuo.ren/about.html">Telegram</a>
-</p>
 
 <p id="baoshuo-age" align="center" style="display: none;"></p>
 
