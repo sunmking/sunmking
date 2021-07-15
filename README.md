@@ -5,6 +5,7 @@
 
 <p id="baoshuo-age" align="center" style="display: none;"></p>
 
+![](https://komarev.com/ghpvc/?username=clyde-cn&color=dc143c)
 
 ### Github Stats
 
