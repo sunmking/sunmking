@@ -5,6 +5,32 @@
 
 <p id="baoshuo-age" align="center" style="display: none;"></p>
 
+## Rapidfire  
+<table><tr><td valign="top" width="50%">
+
+- 🔭 I’m currently working on [Python](https://www.python.org)  
+  
+
+- 🌱 I’m currently learning Python and Java  
+  
+
+- ❓ Ask me about anything related to network technology  
+  
+
+- ⚡ Fun fact: Play Raspberry Pi  
+
+
+</td><td valign="top" width="50%">
+
+<div align="center">
+<img src="https://rishavanand.github.io/static/images/greetings.gif" align="center" style="width: 100%" />
+</div>  
+
+
+</td></tr></table>  
+
+<br/>  
+
 ## Github Stats  
 <table><tr><td valign="top" width="50%">
 
