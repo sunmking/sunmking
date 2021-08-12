@@ -5,8 +5,13 @@
 
 <p id="baoshuo-age" align="center" style="display: none;"></p>
 
-### Github Stats
+## Github Stats  
+<table><tr><td valign="top" width="50%">
 
-<a href="https://github.com/clyde-cn" style="width:100%">
-  <img src="https://github-readme-stats.vercel.app/api?username=clyde-cn&theme=dark&show_icons=true&hide_title=true" style="width: 100%; max-width: 100%; min-width: 100%;">
-</a>
+<img src="https://github-readme-stats.vercel.app/api?username=clyde-cn&show_icons=true&count_private=true&hide_border=true" align="left" style="width: 100%" />
+
+</td><td valign="top" width="50%">
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=clyde-cn&hide_border=true&layout=compact" align="left" style="width: 100%" />
+
+</td></tr></table>  
