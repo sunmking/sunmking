@@ -6,7 +6,7 @@
 <p id="baoshuo-age" align="center" style="display: none;"></p>
 
 ## Rapidfire  
-<table><tr><td valign="top" width="42%">
+<table><tr><td valign="top" width="50%">
 
 - 🔭 I’m currently working on [PHP](https://www.php.net)  
   
@@ -20,7 +20,7 @@
 - ⚡ Fun fact: Listen To Music  
 
 
-</td><td valign="top" width="58%">
+</td><td valign="top" width="50%">
 
 <div align="center">
 <img src="https://github-readme-stats.vercel.app/api?username=clyde-cn&show_icons=true&count_private=true&hide_border=true" align="left" style="width: 58%" />
