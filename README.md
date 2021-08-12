@@ -7,6 +7,6 @@
 
 ### Github Stats
 
-<a href="https://github.com/clyde-cn">
-  <img src="https://github-readme-stats.vercel.app/api?username=clyde-cn&show_icons=true&icon_color=805AD5&text_color=718096&bg_color=ffffff&hide_title=true" style="width: 100%; max-width: 100%; min-width: 100%;">
+<a href="https://github.com/clyde-cn" style="width:100%">
+  <img src="https://github-readme-stats.vercel.app/api?username=clyde-cn&theme=dark&show_icons=true&icon_color=805AD5&text_color=718096&bg_color=ffffff&hide_title=true" style="width: 100%; max-width: 100%; min-width: 100%;">
 </a>
