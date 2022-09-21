@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS画三角形引发的一些思考 | DaraW | Code is Poetry</title>
+
+  
+  <meta name="author" content="DaraW">
+  
+
+  
+  <meta name="description" content="JavaScript Developer">
+  
+
+  
+  
+  <meta name="keywords" content="CSS">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="CSS画三角形引发的一些思考"/>
+
+  <meta property="og:site_name" content="DaraW"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="DaraW" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">DaraW</a>
+    </h1>
+    <p class="site-description">Code is Poetry</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>CSS画三角形引发的一些思考</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2015/08/31/thoughts-about-drawing-triangle-with-css/" rel="bookmark">
+        <time class="entry-date published" datetime="2015-08-30T16:00:00.000Z">
+          2015-08-31
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>&emsp;&emsp;今天刷知乎时看到了一个问题，<a href="http://www.zhihu.com/question/35180018" target="_blank" rel="noopener">有谁能详细讲一下css如何画出一个三角形？怎么想都想不懂？ - 知乎</a>。很巧，刚入前端坑的我前不久也遇到过这个问题，今天再来谈一谈这个问题则是因为知乎的一些答案引发了我的更深的思考。  </p>
+<a id="more"></a>
+<p>&emsp;&emsp;第一次遇到这个问题是在撸Bootstrap的一个demo ——<a href="http://v3.bootcss.com/examples/blog/" target="_blank" rel="noopener">Blog Template for Bootstrap</a>，它的导航栏中用到了CSS来画三角形：<br><img src="/img/20150831231156.png" alt="截图1"><br>我们来看一看其中重点的那段CSS代码：  </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.blog-nav</span> <span class="selector-class">.active</span><span class="selector-pseudo">:after</span> &#123;  </span><br><span class="line">      <span class="attribute">position</span>: absolute;  </span><br><span class="line">      <span class="attribute">bottom</span>: <span class="number">0</span>;  </span><br><span class="line">      <span class="attribute">left</span>: <span class="number">50%</span>;  </span><br><span class="line">      <span class="attribute">width</span>: <span class="number">0</span>;  </span><br><span class="line">      <span class="attribute">height</span>: <span class="number">0</span>;  </span><br><span class="line">      <span class="attribute">margin-left</span>: -<span class="number">5px</span>;  </span><br><span class="line">      <span class="attribute">vertical-align</span>: middle;  </span><br><span class="line">      <span class="attribute">content</span>: <span class="string">" "</span>;  </span><br><span class="line">      <span class="attribute">border-right</span>: <span class="number">5px</span> solid transparent;  </span><br><span class="line">      <span class="attribute">border-bottom</span>: <span class="number">5px</span> solid;  </span><br><span class="line">      <span class="attribute">border-left</span>: <span class="number">5px</span> solid transparent;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这只是一段简单的用CSS画出等腰直角三角形的实现案例，当时我在SF的一篇文章找到了答案：<a href="http://segmentfault.com/a/1190000000652249" target="_blank" rel="noopener">图解利用CSS实现三角形 - SegmentFault</a>，通过这篇文章，我明白了原来border是一个梯形，当梯形的上底为0的极限情况时，梯形就成了一个三角形，画一个正方形，正方形的div为0时，隐藏三条border，剩下的可见的border便是所需的三角形。于是bootstrap的demo中的问题迎刃而解。<br>&emsp;&emsp;然而，bootstrap的demo中的等边直角三角形是一个非常经典的情况，那么画任意三角形的时候怎么办呢？知乎的<a href="http://www.zhihu.com/people/vkki" target="_blank" rel="noopener">@Vkki</a>用户给出了结论：  </p>
+<blockquote>
+<p>（上边的 width 控制了这个三角形上顶点离 div 边缘的距离是 10px）<br>下边的 width 控制了三角形的高（150px）<br>左右两边的 width 分别控制了三角形的底边长的两部分（加起来共 200px）<br><img src="/img/Vkki.png" alt="Vkki"><br><img src="/img/Vkki2.png" alt="Vkki">  </p>
+</blockquote>
+<p>&emsp;&emsp;记住结论固然重要，然而我又引发了好奇心，如果左右上下四边的width不相等的情况下，各个border又是什么样的的？<br>&emsp;&emsp;于是我画了一个div，CSS代码如下：  </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span>&#123;  </span><br><span class="line">      <span class="attribute">width</span>:<span class="number">0</span>;  </span><br><span class="line">      <span class="attribute">height</span>:<span class="number">0</span>;  </span><br><span class="line">      <span class="attribute">border-top</span>:<span class="number">100px</span> solid;  </span><br><span class="line">      <span class="attribute">border-bottom</span>:<span class="number">125px</span> solid;  </span><br><span class="line">      <span class="attribute">border-left</span>:<span class="number">150px</span> solid;  </span><br><span class="line">      <span class="attribute">border-right</span>:<span class="number">175px</span> solid;  </span><br><span class="line">      <span class="attribute">border-color</span>:red green blue yellow;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;在浏览器中的效果图：<br><img src="/img/20150831235000.png" alt="效果图"><br>&emsp;&emsp;结果和预想的有点不一样，但是结合上面的结论，已经非常好理解了：）<br>&emsp;&emsp;其实在回答中，<a href="http://www.zhihu.com/people/wang-xiao-9-14" target="_blank" rel="noopener">@王潇</a>的答案也让我想到了很多，他利用CSS3中transform属性的shewX()方法以及rotate()方法还有活用skewX()方法画出了一般形状的三角形，和其他答案不一样的思路确实让我眼前一亮，想起了强大的CSS3，利用CSS3的新特性可以完成很多以前只能用js实现的效果，真棒！当然，付出的代价是兼容性。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/前端/">前端</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/CSS/">CSS</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 DaraW
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

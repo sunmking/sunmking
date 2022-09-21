@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>制作列带有斑马条纹背景的表格 | DaraW | Code is Poetry</title>
+
+  
+  <meta name="author" content="DaraW">
+  
+
+  
+  <meta name="description" content="JavaScript Developer">
+  
+
+  
+  
+  <meta name="keywords" content="css">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="制作列带有斑马条纹背景的表格"/>
+
+  <meta property="og:site_name" content="DaraW"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="DaraW" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">DaraW</a>
+    </h1>
+    <p class="site-description">Code is Poetry</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>制作列带有斑马条纹背景的表格</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/05/16/table-with-striped-lines/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-05-16T05:27:00.000Z">
+          2016-05-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>在切页面时，遇到了一个有趣的表格，如图所示：</p>
+<a id="more"></a>
+<p><img src="/img/table-with-striped-lines0.png" alt="">  </p>
+<p>下意识的想到了<code>bootstrap</code>的斑马纹效果table，然而记忆中bs只有行斑马纹效果，至于实现事实上很简单，直接去Github看最终生成的<code>bootstrap.css</code>文件，当前的2321~2323行为：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.table-striped</span> &gt; <span class="selector-tag">tbody</span> &gt; <span class="selector-tag">tr</span><span class="selector-pseudo">:nth-of-type(odd)</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#f9f9f9</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>事实上这给了我一个很好的思路，借助<code>nth-child()</code>选择器，先对每行的奇数<code>td</code>设定背景，连起来就是奇数列做了特殊背景处理，也就是斑马纹效果，然后再对第一行和最后一行做特殊处理让边角圆润，下面贴上自己的代码（主要提供一个思路，css比较烂，请轻喷==）：<br><strong>html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">class</span>=<span class="string">"account-course-lessons"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tbody</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>L1<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>L2<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>L3<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>L4<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>L5<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tbody</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>scss</strong>  </p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">table</span><span class="selector-class">.account-course-lessons</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">600px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">300px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">1em</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: rgb(<span class="number">221</span>, <span class="number">221</span>, <span class="number">221</span>);</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">text-decoration</span>: underline;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">tr</span> &#123;</span><br><span class="line">    <span class="selector-tag">td</span> &#123;</span><br><span class="line">      <span class="attribute">border-bottom</span>: <span class="number">2px</span> solid rgb(<span class="number">215</span>, <span class="number">215</span>, <span class="number">215</span>);</span><br><span class="line">      <span class="attribute">height</span>: <span class="number">60px</span>;</span><br><span class="line"></span><br><span class="line">      <span class="selector-tag">a</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>: gray;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">1.5em</span>;</span><br><span class="line">        <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">1em</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">tr</span> &#123;</span><br><span class="line">    <span class="selector-tag">td</span><span class="selector-pseudo">:nth-child</span>(2n+1) &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: rgb(<span class="number">235</span>, <span class="number">235</span>, <span class="number">235</span>);</span><br><span class="line">      <span class="attribute">border-bottom</span>: <span class="number">2px</span> solid rgb(<span class="number">215</span>, <span class="number">215</span>, <span class="number">215</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">tr</span><span class="selector-pseudo">:nth-child</span>(1) &#123;</span><br><span class="line">    <span class="selector-tag">td</span><span class="selector-pseudo">:nth-child</span>(2n+1) &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: rgb(<span class="number">235</span>, <span class="number">235</span>, <span class="number">235</span>);</span><br><span class="line">      <span class="attribute">border-top</span>: <span class="number">10px</span> solid transparent;</span><br><span class="line">      <span class="attribute">border-left</span>: <span class="number">10px</span> solid transparent;</span><br><span class="line">      <span class="attribute">border-right</span>: <span class="number">10px</span> solid transparent;</span><br><span class="line">      <span class="attribute">border-radius</span>: <span class="number">20px</span> <span class="number">20px</span> <span class="number">0</span> <span class="number">0</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">tr</span><span class="selector-pseudo">:nth-last-child</span>(1) &#123;</span><br><span class="line">    <span class="selector-tag">td</span><span class="selector-pseudo">:nth-child</span>(2n+1) &#123;</span><br><span class="line">      <span class="attribute">background-color</span>: rgb(<span class="number">235</span>, <span class="number">235</span>, <span class="number">235</span>);</span><br><span class="line">      <span class="attribute">border-bottom</span>: <span class="number">10px</span> solid transparent;</span><br><span class="line">      <span class="attribute">border-left</span>: <span class="number">10px</span> solid transparent;</span><br><span class="line">      <span class="attribute">border-right</span>: <span class="number">10px</span> solid transparent;</span><br><span class="line">      <span class="attribute">border-radius</span>:  <span class="number">0</span> <span class="number">0</span> <span class="number">20px</span> <span class="number">20px</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">td</span> &#123;</span><br><span class="line">      <span class="attribute">border-bottom</span>: <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/前端/">前端</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 DaraW
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

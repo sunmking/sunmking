@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JS实现自定义事件 | DaraW | Code is Poetry</title>
+
+  
+  <meta name="author" content="DaraW">
+  
+
+  
+  <meta name="description" content="JavaScript Developer">
+  
+
+  
+  
+  <meta name="keywords" content="JavaScript">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JS实现自定义事件"/>
+
+  <meta property="og:site_name" content="DaraW"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="DaraW" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">DaraW</a>
+    </h1>
+    <p class="site-description">Code is Poetry</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>JS实现自定义事件</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2016/08/02/javascript-event-emitter/" rel="bookmark">
+        <time class="entry-date published" datetime="2016-08-02T14:30:00.000Z">
+          2016-08-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><blockquote>
+<p>请实现下面的自定义事件Event对象的接口，功能见注释（测试1）<br>该Event对象的接口需要能被其他对象拓展复用（测试2）</p>
+</blockquote>
+<a id="more"></a>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试 1</span></span><br><span class="line">Event.on(<span class="string">"test"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;)</span><br><span class="line">Event.on(<span class="string">"test"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"test"</span>);</span><br><span class="line">&#125;)</span><br><span class="line">Event.emit(<span class="string">"test"</span>, <span class="string">"hello world"</span>); <span class="comment">// 输出“hello world”和”test”</span></span><br><span class="line"><span class="comment">//测试2</span></span><br><span class="line"><span class="keyword">var</span> person1 = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> person2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.assign(person1, Event);</span><br><span class="line"><span class="built_in">Object</span>.assign(person2, Event);</span><br><span class="line"></span><br><span class="line">person1.on(<span class="string">"call1"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"person1"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">person2.on(<span class="string">"call2"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"person2"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">person1.emit(<span class="string">"call1"</span>); <span class="comment">// 输出“person1”</span></span><br><span class="line">person1.emit(<span class="string">"call2"</span>); <span class="comment">// 没有输出</span></span><br><span class="line">person2.emit(<span class="string">"call1"</span>); <span class="comment">// 没有输出</span></span><br><span class="line">person2.emit(<span class="string">"call2"</span>); <span class="comment">// 输出”person2”</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这是个经典的自定义事件，实现”Pub/Sub”，Node.js中有个比较完善的实现<code>EventEmitter</code>。  </p>
+<p>原理则是构造出一个集成队列的对象，每一个事件对应对象的一个队列，在自定义事件后将回调函数入队，触发事件后回调函数依次出队并执行。  </p>
+<p>个人偏爱IIFE+构造器模式+原型模式，于是有了下面的一个简易实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">exports</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">EventEmitter</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  EventEmitter.prototype.on = <span class="function"><span class="keyword">function</span> (<span class="params">type, handler</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._cbQueue = <span class="keyword">this</span>._cbQueue || &#123;&#125;;</span><br><span class="line">    <span class="keyword">this</span>._cbQueue[type] = <span class="keyword">this</span>._cbQueue[type]|| [];</span><br><span class="line">    <span class="keyword">this</span>._cbQueue[type].push(handler);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  EventEmitter.prototype.emit = <span class="function"><span class="keyword">function</span> (<span class="params">type, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._cbQueue[type]) &#123;</span><br><span class="line">      <span class="keyword">this</span>._cbQueue[type].forEach(<span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</span><br><span class="line">        cb(data);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  exports.EventEmitter = EventEmitter;</span><br><span class="line"></span><br><span class="line">&#125;(global));</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Event = <span class="keyword">new</span> EventEmitter();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Test 1</span></span><br><span class="line">Event.on(<span class="string">"test"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;)</span><br><span class="line">Event.on(<span class="string">"test"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"test"</span>);</span><br><span class="line">&#125;)</span><br><span class="line">Event.emit(<span class="string">"test"</span>, <span class="string">"hello world"</span>); <span class="comment">// 输出“hello world”和”test”</span></span><br></pre></td></tr></table></figure>
+<p>这样便满足了测试1的要求，然而这样对于测试2是不行的，因为<code>Object.assign()</code>方法不能复制不可遍历的属性和继承属性，也就意味着<code>Event</code>对象上的<code>on</code>和<code>emit</code>不能被复制过去。那么复制<code>Event.prototype</code>对象呢？这样确实是可行的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Test2</span></span><br><span class="line"><span class="keyword">var</span> person1 = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> person2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.assign(person1, EventEmitter.prototype);</span><br><span class="line"><span class="built_in">Object</span>.assign(person2, EventEmitter.prototype);</span><br><span class="line"></span><br><span class="line">person1.on(<span class="string">"call1"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"person1"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">person2.on(<span class="string">"call2"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"person2"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">person1.emit(<span class="string">"call1"</span>); <span class="comment">// 输出“person1”</span></span><br><span class="line">person1.emit(<span class="string">"call2"</span>); <span class="comment">// 没有输出</span></span><br><span class="line">person2.emit(<span class="string">"call1"</span>); <span class="comment">// 没有输出</span></span><br><span class="line">person2.emit(<span class="string">"call2"</span>); <span class="comment">// 输出”person2”</span></span><br></pre></td></tr></table></figure>
+<p>虽然差不多实现了题目中的要求，但是和题目中的要求依然有些偏差，于是我又想到了，如果放弃原型模式+构造器模式，单纯的把Event作为一个对象而不是一个函数呢？<br>实现很简单：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">exports</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> Event = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  Event.on = <span class="function"><span class="keyword">function</span> (<span class="params">type, handler</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._cbQueue = <span class="keyword">this</span>._cbQueue || &#123;&#125;;</span><br><span class="line">    <span class="keyword">this</span>._cbQueue[type] = <span class="keyword">this</span>._cbQueue[type]|| [];</span><br><span class="line">    <span class="keyword">this</span>._cbQueue[type].push(handler);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Event.emit = <span class="function"><span class="keyword">function</span> (<span class="params">type, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._cbQueue[type]) &#123;</span><br><span class="line">      <span class="keyword">this</span>._cbQueue[type].forEach(<span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</span><br><span class="line">        cb(data);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  exports.Event = Event;</span><br><span class="line"></span><br><span class="line">&#125;(global));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Test 1</span></span><br><span class="line">Event.on(<span class="string">"test"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;)</span><br><span class="line">Event.on(<span class="string">"test"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"test"</span>);</span><br><span class="line">&#125;)</span><br><span class="line">Event.emit(<span class="string">"test"</span>, <span class="string">"hello world"</span>); <span class="comment">// 输出“hello world”和”test”</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Test2</span></span><br><span class="line"><span class="keyword">var</span> person1 = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> person2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.assign(person1, Event);</span><br><span class="line"><span class="built_in">Object</span>.assign(person2, Event);</span><br><span class="line"></span><br><span class="line">person1.on(<span class="string">"call1"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"person1"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">person2.on(<span class="string">"call2"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"person2"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">person1.emit(<span class="string">"call1"</span>); <span class="comment">// 输出“person1”</span></span><br><span class="line">person1.emit(<span class="string">"call2"</span>); <span class="comment">// 输出”person2”</span></span><br><span class="line">person2.emit(<span class="string">"call1"</span>); <span class="comment">// 输出”person1”</span></span><br><span class="line">person2.emit(<span class="string">"call2"</span>); <span class="comment">// 输出”person2”</span></span><br></pre></td></tr></table></figure>
+<p>测试1的结果如预期一样，然而测试2却出了问题，debug看了一下<code>Event</code>对象，<code>Event.on</code>执行后上面竟然有个可以遍历的属性<code>_cbQueue</code>，而且<code>_cbQueue</code>是一个对象而不是一个字面量，所以在<code>Object.assign()</code>拷贝的过程中，将<code>Event._cbQueue</code>对象引用赋值给了<code>person1._cbQueue</code>和<code>person2._cbQueue</code>，也就是说这三者指向了内存中的同一个对象，只要修改一个，其他几个都会跟着修改；当不执行<code>Event.on</code>时，<code>Event</code>上就不会有属性<code>_cbQueue</code>，那么接下来<code>person1</code>和<code>person2</code>执行<code>on</code>方法后，<code>this</code>指向了他们本身，会创造他们自己的互不影响的<code>_cbQueue</code>属性。<br>但不执行<code>Event.on</code>这不是解决的完美办法，不过问题已经定位了，解决也很简单，修改<code>Event</code>对象的属性<code>_cbQueue</code>为不可遍历，让拷贝过程不拷贝属性<code>_cbQueue</code>即可：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">exports</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> Event = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(Event, <span class="string">"_cbQueue"</span>, &#123;</span><br><span class="line">	  value : &#123;&#125;,</span><br><span class="line">	  writable : <span class="literal">true</span>,</span><br><span class="line">	  enumerable : <span class="literal">false</span>,</span><br><span class="line">	  configurable : <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  Event.on = <span class="function"><span class="keyword">function</span> (<span class="params">type, handler</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>._cbQueue = <span class="keyword">this</span>._cbQueue || &#123;&#125;;</span><br><span class="line">    <span class="keyword">this</span>._cbQueue[type] = <span class="keyword">this</span>._cbQueue[type]|| [];</span><br><span class="line">    <span class="keyword">this</span>._cbQueue[type].push(handler);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  Event.emit = <span class="function"><span class="keyword">function</span> (<span class="params">type, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>._cbQueue[type]) &#123;</span><br><span class="line">      <span class="keyword">this</span>._cbQueue[type].forEach(<span class="function"><span class="keyword">function</span> (<span class="params">cb</span>) </span>&#123;</span><br><span class="line">        cb(data);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  exports.Event = Event;</span><br><span class="line"></span><br><span class="line">&#125;(global));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Test 1</span></span><br><span class="line">Event.on(<span class="string">"test"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;)</span><br><span class="line">Event.on(<span class="string">"test"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"test"</span>);</span><br><span class="line">&#125;)</span><br><span class="line">Event.emit(<span class="string">"test"</span>, <span class="string">"hello world"</span>); <span class="comment">// 输出“hello world”和”test”</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Test2</span></span><br><span class="line"><span class="keyword">var</span> person1 = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> person2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.assign(person1, Event);</span><br><span class="line"><span class="built_in">Object</span>.assign(person2, Event);</span><br><span class="line"></span><br><span class="line">person1.on(<span class="string">"call1"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"person1"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">person2.on(<span class="string">"call2"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"person2"</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">person1.emit(<span class="string">"call1"</span>); <span class="comment">// 输出“person1”</span></span><br><span class="line">person1.emit(<span class="string">"call2"</span>); <span class="comment">// 没有输出</span></span><br><span class="line">person2.emit(<span class="string">"call1"</span>); <span class="comment">// 没有输出</span></span><br><span class="line">person2.emit(<span class="string">"call2"</span>); <span class="comment">// 输出”person2”</span></span><br></pre></td></tr></table></figure>
+<p>这样便算完美实现了题目的要求。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实原理很简单，没想到在周边的实现上浪费了一些debug的时间，有些惭愧。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 DaraW
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

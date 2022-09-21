@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6实现内部类的写法 | DaraW | Code is Poetry</title>
+
+  
+  <meta name="author" content="DaraW">
+  
+
+  
+  <meta name="description" content="JavaScript Developer">
+  
+
+  
+  
+  <meta name="keywords" content="ES6,Class">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="ES6实现内部类的写法"/>
+
+  <meta property="og:site_name" content="DaraW"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="DaraW" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">DaraW</a>
+    </h1>
+    <p class="site-description">Code is Poetry</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>ES6实现内部类的写法</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/01/17/es6-static-class/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-01-17T08:55:15.000Z">
+          2017-01-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>最近在把 <code>JIris</code> 移植到JS平台 <code>Iris.js</code> 的过程中不断的在Java和JS两种语言之间切换，ES6的 <code>Class</code> 某种程度来说可以写出更加优雅的代码，而不用去管背后的原型实现。但是不得不说有一个遗憾就是 ES6 虽然支持了静态方法，但是还不支持静态属性和静态类，于是仔细观察了下发现了几种ES6实现静态类的相对优雅的写法。</p>
+<a id="more"></a>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>简化一个Demo，先是 Java 的写法：<br>** IrisValue.java **</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IrisValue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mValue;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">IrisValue</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mValue = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        mValue = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> test = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> test;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTest</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">            test = value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        IrisValue irisValue = <span class="keyword">new</span> IrisValue(<span class="number">10</span>);</span><br><span class="line">        IrisValue irisValue2 = <span class="keyword">new</span> IrisValue(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        irisValue.setValue(<span class="number">100</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(irisValue.getValue());</span><br><span class="line">        System.out.println(irisValue2.getValue());</span><br><span class="line"></span><br><span class="line">        Test testValue = <span class="keyword">new</span> Test();</span><br><span class="line">        Test testValue2 = <span class="keyword">new</span> Test();</span><br><span class="line"></span><br><span class="line">        System.out.println(testValue.getTest());</span><br><span class="line">        System.out.println(testValue2.getTest());</span><br><span class="line">        testValue.setTest(<span class="number">9</span>);</span><br><span class="line">        testValue2.setTest(<span class="number">99</span>);</span><br><span class="line">        System.out.println(testValue.getTest());</span><br><span class="line">        System.out.println(testValue2.getTest());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Test</code> 是<code>IrisValue</code>类的静态方法，并不属于<code>IrisValue</code>的实例对象。上面代码执行结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">100</span><br><span class="line">10</span><br><span class="line">0</span><br><span class="line">0</span><br><span class="line">9</span><br><span class="line">99</span><br></pre></td></tr></table></figure>
+
+<p>那么等同的JS代码应该怎么写呢？<br>ES6的Class本质还是函数，所以有一个很容易想到的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IrisValue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mValue = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">get</span> value() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.mValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> value(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mValue = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">this</span>.mTest = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">get</span> test() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.mTest;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> test(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mTest = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">IrisValue.Test = Test;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> irisValue = <span class="keyword">new</span> IrisValue(<span class="number">10</span>);</span><br><span class="line"><span class="keyword">let</span> irisValue2 = <span class="keyword">new</span> IrisValue(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">irisValue.value = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(irisValue.value);</span><br><span class="line"><span class="built_in">console</span>.log(irisValue2.value);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> testValue = <span class="keyword">new</span> IrisValue.Test();</span><br><span class="line"><span class="keyword">let</span> testValue2 = <span class="keyword">new</span> IrisValue.Test();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(testValue.test);</span><br><span class="line"><span class="built_in">console</span>.log(testValue2.test);</span><br><span class="line">testValue.test = <span class="number">9</span>;</span><br><span class="line">testValue2.test = <span class="number">99</span>;</span><br><span class="line"><span class="built_in">console</span>.log(testValue.test);</span><br><span class="line"><span class="built_in">console</span>.log(testValue2.test);</span><br></pre></td></tr></table></figure>
+<p>输出结果和上面Java（预想的）一样，静态属性目前也能这样实现。  </p>
+<p>但是不要忘了<code>get/set</code>函数，所以应该有更加优雅的静态类和静态属性的写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IrisValue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mValue = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">get</span> value() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.mValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> value(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mValue = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">get</span> Test() &#123;</span><br><span class="line">    		<span class="keyword">return</span> Test;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">this</span>.mTest = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">get</span> test() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.mTest;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> test(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mTest = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实我们还能再<del>优雅</del>一点～</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IrisValue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mValue = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">get</span> value() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.mValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> value(value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.mValue = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">get</span> Test() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">            <span class="keyword">constructor</span>() &#123;</span><br><span class="line">                <span class="keyword">this</span>.mTest = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">get</span> test() &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.mTest;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">set</span> test(value) &#123;</span><br><span class="line">                <span class="keyword">this</span>.mTest = value;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实上面的这些写法还是不够优雅，避免不了的牺牲了可读性。既然ES6已经引进了Class，期待以后能和Java一样去写静态类和静态属性。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/前端/">前端</a>, <a href="/categories/前端/ES6/">ES6</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/ES6/">ES6</a><a href="/tags/Class/">Class</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 DaraW
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>

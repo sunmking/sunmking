@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>前端函数式编程 | DaraW | Code is Poetry</title>
+
+  
+  <meta name="author" content="DaraW">
+  
+
+  
+  <meta name="description" content="JavaScript Developer">
+  
+
+  
+  
+  <meta name="keywords" content="FP,React,Redux">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="前端函数式编程"/>
+
+  <meta property="og:site_name" content="DaraW"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="DaraW" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">DaraW</a>
+    </h1>
+    <p class="site-description">Code is Poetry</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>前端函数式编程</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2017/08/16/fp-with-fe/" rel="bookmark">
+        <time class="entry-date published" datetime="2017-08-16T14:19:15.000Z">
+          2017-08-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>前言：这个其实是我最近打算在在团队做的一个分享，这个分享将会聊聊函数式编程在前端的一些成熟的应用以及尝试。</p>
+<a id="more"></a>
+<h2 id="Something-interesting"><a href="#Something-interesting" class="headerlink" title="Something interesting"></a>Something interesting</h2><h3 id="罗素悖论"><a href="#罗素悖论" class="headerlink" title="罗素悖论"></a>罗素悖论</h3><p>在讲罗素悖论之前，先提一个小的需求，看看大家能不能实现：</p>
+<blockquote>
+<p>设计出一个函数<code>f</code>，接受一个函数<code>g</code>作为参数，返回布尔值。<br>函数<code>f</code>判断<code>g</code>会不会导致死循环，会则返回<code>true</code>，不会则返回false。</p>
+</blockquote>
+<p>如果学过离散数学的同学可能就会想起来了，这便是著名的<strong>图灵机停机问题</strong>。这个需求看似描述很完备，有输入输出的要求，也有函数功能的要求，但这个需求是不可实现的。<br>证明很简单：假设存在满足上述要求的函数<code>f</code>，那么我们定义一个邪恶的函数<code>evil</code>，其伪代码定义如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">evil</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (f(evil) == <span class="literal">true</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">while</span>(<span class="literal">true</span>) &#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>于是这里便产生了悖论：如果<code>f</code>判定<code>evil</code>不会死循环，<code>evil</code>就会死循环；反之则不会死循环。所以假设不成立，即不存在符合要求的<code>f</code>。  </p>
+<p>类似的悖论还有著名的理发师悖论：理发师给所有不给自己理发的人理发。<br>不可解的<code>停机问题</code>其实便是<strong>哥德尔不完备定理</strong>的一种形式。</p>
+<h3 id="Lambda-λ-演算"><a href="#Lambda-λ-演算" class="headerlink" title="Lambda (λ) 演算"></a>Lambda (λ) 演算</h3><blockquote>
+<p>Lambda演算可以被称为最小的通用程序设计语言。它包括一条变换规则（变量替换）和一条函数定义方式，Lambda演算之通用在于，任何一个可计算函数都能用这种形式来表达和求值。因而，它是等价于图灵机的。尽管如此，Lambda演算强调的是变换规则的运用，而非实现它们的具体机器。可以认为这是一种更接近软件而非硬件的方式。 –from Wikipedia</p>
+</blockquote>
+<p>这里我不会去讲太多关于Lambda演算的内容，一个原因是在没有一些相关的数理逻辑的前置知识的前提下很难三言两语之内将其描述清楚，另一个原因是我自己也不是很懂（笑。  </p>
+<p>那么为什么会提到Lambda演算呢？在图灵机的停机问题之前，有一个更加有趣的问题：能否判断两个lambda演算表达式是否等价，这个问题和图灵机停机问题同属于判定性问题。邱奇运用λ演算在1936年给出判定性问题一个否定的答案。<br>最重要的，Lambda演算对函数式编程语言有巨大的影响，比如Lisp语言、ML语言和Haskell语言。而通过这些，我们将引入今天的主要话题：函数式编程。但是注意的是，今天我讲的将会是偏前端方向的应用，而不会去过度的探讨演算、或者是范畴论等知识。</p>
+<h2 id="语言层面"><a href="#语言层面" class="headerlink" title="语言层面"></a>语言层面</h2><p>首先放出我的观点：<strong>JavaScriprt 适合也不适合函数式编程</strong>。</p>
+<h3 id="适合函数式编程"><a href="#适合函数式编程" class="headerlink" title="适合函数式编程"></a>适合函数式编程</h3><p>JavaScript是一门多范式的语言，我们很难去说JS到底是面向过程还是面向对象的语言，甚至我们也可以说JS就是一门函数式语言。但是这一切并不是矛盾的，OOP与FP完全可以结合起来使用。  </p>
+<p>对于函数式语言的定义其实没有明确的界限，没有说一定要有Monad，或者是Hindley-Milner类型系统等等。JS中函数是一等对象，所以完全可以认为JS是一门函数式编程语言，而且JS的灵活性允许我们去模拟常见函数式语言中的大多数操作。</p>
+<ul>
+<li><p>纯函数 无副作用</p>
+<blockquote>
+<p>此函数在相同的输入值时，需产生相同的输出。函数的输出和输入值以外的其他隐藏信息或状态无关，也和由I/O设备产生的外部输出无关。<br>该函数不能有语义上可观察的函数副作用，诸如“触发事件”，使输出设备输出，或更改输出值以外物件的内容等。</p>
+</blockquote>
+</li>
+<li><p>不可变数据</p>
+<blockquote>
+<p>Immutable Data是指一旦被创造后，就不可以被改变的数据。</p>
+</blockquote>
+<p>也许大家会产生疑惑，没有变量应用怎么跑起来？这里注意的是虽然没有变量，但是会有绑定的概念，数据虽然不可变，但是绑定可变。  </p>
+<p>JS本身提供了一个<code>Object.freeze()</code>方法，但是类似浅拷贝，它只是一层浅<code>freeze</code>，所以如果真的要去<code>freeze</code>一个对象，必须一层层递归<code>freeze</code>处理。  </p>
+<p>这样做虽然可以实现不可变，但是无论做不做<code>freeze</code>处理，每次都产生一个新的对象会带来大量的中间变量，这一点后面我讲到Redux的时候也会提到，如果使用过Redux，相信应该知道这个问题，<code>Object.assign</code>会带来大量的中间对象，影响性能，而解决方案就是Immutable.js。<br>Immutable.js是一个不可变数据结构的JS库，它的原理其实也很简单，借助字典树，共享了不变的部分。有兴趣的同学可以读一读一篇著名的文章《Understanding Clojure’s Persistent Vectors》，Immutable.js的实现原理与Clojure的数据结构底层实现非常相似。下面的Redux环节我还会提到这个问题。</p>
+</li>
+<li><p>递归<br>循环和循环是常见的流程控制方式，在绝大多数场景下两者是可以等价互换的。<br>递归的优点在于代码简洁、清晰，并且容易验证正确性。在一些函数式语言中，即使存在流程控制语句<code>if</code> <code>else</code>等等，他们也只是函数的语法糖。  </p>
+</li>
+<li><p>curry / compose / …<br>这些虽然JS没有直接提供，但是已经有足够多的第三方库可以来做这个工作，例如 Underscore / Lodash / Ramda。这些函数的实现也可以阅读上述库的源码来学习。</p>
+</li>
+<li><p>惰性求值<br>惰性求值可以最小化计算机要做的工作。JS中有着一小部分表达式是属于惰性求值的，例如<code>||</code>和<code>&amp;&amp;</code>，这也是所谓的“短路原理”：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> i = <span class="number">1</span></span><br><span class="line"><span class="literal">true</span> || i++</span><br><span class="line"><span class="literal">false</span> &amp;&amp; i++</span><br><span class="line"><span class="built_in">console</span>.log(i) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>但是语言直接提供的这点惰性实在是太可怜了，JS中也基本都是立即求值。<br>这里拿Haskell举个例子：</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Prelude</span>&gt; <span class="keyword">import</span> Data.List</span><br><span class="line"><span class="type">Prelude</span> <span class="type">Data</span>.<span class="type">List</span>&gt; take <span class="number">10</span> $ sort [<span class="number">100</span>, <span class="number">99.</span><span class="number">.0</span>] :: [<span class="type">Int</span>]</span><br><span class="line"><span class="comment">-- [0,1,2,3,4,5,6,7,8,9]</span></span><br></pre></td></tr></table></figure>
+<p>简单介绍下，<code>[Int]</code>是类型标注，表示返回的是一个整型列表；<code>[100, 99..0]</code>代表生成一个等差的列表；<code>sort</code>是排序；<code>$</code>是一个中缀函数，可以理解为把右边部分括起来。<br>这段代码的意思是生成一个100到0的等差数列，把这个等差列表从小到大排序并取出前十个。如果在JavaScript中的等价的代码应该类似如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr = []</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">100</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">  arr.push(i)</span><br><span class="line">&#125;</span><br><span class="line">arr.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line"><span class="built_in">console</span>.log(arr.splice(<span class="number">0</span>, <span class="number">10</span>))</span><br><span class="line"><span class="comment">// [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]</span></span><br></pre></td></tr></table></figure>
+<p>无论是什么JS引擎，这段JS代码在执行的时候都会把这个数组的所有元素都遍历一遍；相反的是上面的Haskell代码在执行的时候，Haskell的编译器GHC只会尝试去计算刚好足够取出需要的10个元素为止。所以，在Haskell中，我们完全可以定义出无限长度的数组，然后设法取出其中的一部分，GHC也会在底层通过一些黑魔法来帮助实现。  </p>
+<p>让我们回到JS：在ES6之前，模拟惰性求值的方式一般是thunk函数，或者借助Stream抽象。所幸ES6使得JS拥有了强大的<code>generator</code>函数，我们现在还可以借助它模拟惰性求值。  </p>
+<p>具体的实现可以阅读参考文献中的文章，也有现成的库例如Lazy.js可以使用，这里不再赘述。  </p>
+<p>但是注意的是，惰性求值可以为我们带来较好的性能，也可以导致性能下降。大量的延迟求值，可能会带来内存的消耗积压。Haskell中这个现象称为任务堆积，所以即便是默认惰性求值的Haskell，也为使用者提供了强制立即求值的方法，有兴趣的同学可以自行学习一些Haskell的知识。</p>
+</li>
+</ul>
+<h3 id="不适合函数式编程"><a href="#不适合函数式编程" class="headerlink" title="不适合函数式编程"></a>不适合函数式编程</h3><ul>
+<li><p>递归<br>在JS中，递归容易导致一个致命的问题：<strong>爆栈</strong>。<br>尾递归优化可以使得尾递归在编译时被优化为循环从而避免爆栈，但是到目前为止，JS是没有什么正儿八经的尾递归优化的，当然我们有着<code>Trampolining</code>这样的奇技淫巧可以巧妙的避免爆栈，但是每一层的转换消耗的匿名函数开销也是不可小觑：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">trampoline</span>(<span class="params">f</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = f.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    <span class="keyword">while</span> (result <span class="keyword">instanceof</span> <span class="built_in">Function</span>) &#123;</span><br><span class="line">      result = result();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> reduce = trampoline(<span class="function"><span class="keyword">function</span> <span class="title">myself</span>(<span class="params">f, list, sum</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (list.length &lt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> val = list.shift();</span><br><span class="line">      <span class="keyword">return</span> myself(f, list, f(val, list));</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上面这段代码来自贺老在今年的FP China会议上的分享STC VS PTC。<br>ES6早已规定了JS应该有尾递归的优化，但是大家迟迟不去实现，主要是尾递归优化的STC与PTC之争：<br>PTC:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">n, total = <span class="number">0</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">0</span>) <span class="keyword">return</span> total</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> sum(n - <span class="number">1</span>, total + n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PTC目前只有Safari支持，V8可以通过flag开启。STC的问题在于不知道写对了没有，开发时不爆栈不代表生产环境不爆栈，以及很难以调试。<br>STC:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span>(<span class="params">n, acc = <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (n === <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> acc;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">continue</span> factorial(n - <span class="number">1</span>, acc * n)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>STC通过新的语法，保证不写对就会报错，但是新的语法会引入维护等一些问题。<br>所以因为STC与PTC之争，至今JS仍没有一个可靠的尾递归优化。</p>
+</li>
+<li><p>纯函数难以保证<br>在Haskell、Clojure等语言中，会有语言或者是编译的层面去做纯度的保障，但是在JS中，这一切只能靠我们自己来做约束，在多人合作的时候很难保证不会有坑。</p>
+</li>
+<li><p>弱类型，难以模拟类型系统</p>
+</li>
+<li><p>没有 monadic io</p>
+</li>
+<li><p>。。。</p>
+</li>
+</ul>
+<h2 id="架构层面"><a href="#架构层面" class="headerlink" title="架构层面"></a>架构层面</h2><p>事实上，随着RxJS、React全家桶等受函数式影响的库的崛起，前端可以说是工程里应用函数式最为成熟的领域之一了。目前应用函数式比较广泛的领域还有金融（Haskell、Erlang等等），大数据（Scala）。</p>
+<h3 id="React全家桶"><a href="#React全家桶" class="headerlink" title="React全家桶"></a>React全家桶</h3><p>首先，<strong>这不是一个React全家桶相关的入门介绍文章</strong>，理解接下来的内容期望你至少有一些React的相关开发经验，有一些Redux的开发经验就更棒了！</p>
+<ul>
+<li><p>React<br>先说说React，提及React，大家想到的往往是V-DOM，以至于Vue2在引入V-DOM后，两者已经极其相似了，事实上两者在设计思想上有一个很大的区别，在于React更加追求纯度，Vue的作者尤雨溪也曾明确表示Vue并不像React那样追求纯度。</p>
+<p>相信大家都知道语法糖，这是指简化的语法，鼓励大家使用，例如ES6的Class、Arrow Function等等都是语法糖。那么不知道你有没有思考过，为什么React的生命周期函数的名字那么长？为什么React直接输出HTML的API名字<code>dangerouslySetInnerHTML</code>那么长？<br>这其实是一个很古老的API设计，叫做<strong>语法盐</strong>，与语法糖相反，它设计出让人感觉难用的API，让使用者在使用前多加思考是不是真的需要使用这些API，从而避免写出低质量的代码设计。</p>
+<p>既然React不鼓励使用生命周期函数，那么React鼓励的是什么呢？答案是<strong>Pure Component</strong>。<br>React鼓励你去从一个不变的角度思考组件，如果你的组件无须设定生命周期钩子函数，那么你的组件类可以继承<code>PureComponent</code>而非普通的<code>Component</code>，<code>PureComponent</code>会自动去做<code>shouldComponentUpdate()</code>的判断优化。<br>但是<code>PureComponent</code>并非万能的灵药，先抛去其浅对比（shallowly compare）<code>state / prop</code>的缺陷不谈，一个应用怎么可能避免不了状态呢？React并不管，它只管给定状态就能做到幂等渲染，虽然保证了自身的纯度，却把状态的问题抛回给了用户。</p>
+</li>
+<li><p>Redux<br>这是社区对React应用的数据层解决方案。这里我也不会去讲Flux架构入门基础，更不会去讲其被讲烂了的Pub/Sub设计模式。</p>
+<p>接触过Redux的一定会对Redux中反复提及<code>reducer</code>纯函数、<code>state</code>不可变等函数式的概念印象深刻；如果读过Redux的源码，你会发现Redux内部通过<code>compose</code>以极低的代码成本实现了洋葱模型的中间件。</p>
+<p>除去这些函数式风格的API，和函数式的实现，更重要的是Redux实现了一套CQRS + ES软件架构。<br>CQRS全称Command Query Responsibility Segregation，即命令查询职责分离；ES全称Event Sourcing，即事件溯源。为什么会提CQRS + ES架构呢？因为目前为止，可以看到的基于函数式的大型项目至少一半都是基于这套架构，</p>
+<p>下面我简单的讲一下这一套架构，CQRS其实就是读写分离，相信了解过数据库的同学不会对这个概念陌生，在分布式数据库中，通常借助读写分离来保证性能，这也是CQRS最常见的应用场景之一；ES则是不保存对象的最新状态，而是保存对象产生的所有事件，通过事件溯源（Event Sourcing，ES）得到对象最新状态。在Redux中，C端采用Event Sourcing的技术，在EventStore中存储事件；Q端存储对象的最新状态，用于提供查询支持。</p>
+<p>ES近年来在并发编程领域应用的也非常多，例如Scala异步编程库Akka，基于Actor异步编程模型结合了ES。这种架构可以避免状态的竞争和锁，以少量的实时性损耗换取了可靠性，不会出现同时更新一个数据的问题。但是现在前端的复杂度还没有达到分布式场景下后端及数据库的程度，所以现在可能还不能去感受到这套架构带来的好处。</p>
+<p>但是Redux借助CQRS+ES，带来的一个直观的好处就是调试工具的使用，相信使用过的同学一定对时光旅行这个功能印象深刻，可以随意的调节得到每个时刻的应用状态。其实现依赖于在Redux中<code>Action</code>就是<code>Event</code>，<code>Reducer</code>就是状态转换，根据初始<code>State</code>和<code>Event</code>记录，可以推算出每一个时刻的状态。</p>
+<p>说了这么多，Redux带来的坏处是什么呢？主要有两点：<br>第一点，在实际的开发中，我们的操作并非都是同步的，几乎是到处充斥着异步操作，而Redux为了保证自身的纯度，把不可靠的异步问题再一次抛给了用户；第二点，JS的数据结构并非天生的不可变，<code>reducer</code>函数为了追求不可变，大量使用<code>Object.assign()</code>来创建新的状态对象（例如下面这段代码，来自Redux文档），所以会产生很多的中间状态变量，带来性能问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">todoApp</span>(<span class="params">state = initialState, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> SET_VISIBILITY_FILTER:</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, state, &#123;</span><br><span class="line">        visibilityFilter: action.filter</span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="keyword">case</span> ADD_TODO:</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, state, &#123;</span><br><span class="line">        todos: [</span><br><span class="line">          ...state.todos,</span><br><span class="line">          &#123;</span><br><span class="line">            text: action.text,</span><br><span class="line">            completed: <span class="literal">false</span></span><br><span class="line">          &#125;</span><br><span class="line">        ]</span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于上面两点，第一点社区的解决方案是redux-thunk、redux-saga、redux-observable，第二点则是Immutable.js。</p>
+</li>
+<li><p>redux-thunk，redux-saga，redux-observable<br>这一块其实我不是很熟悉，也没有真正在业务中尝试使用过这些方案，就不献丑了，推荐阅读参考资料里的《Redux Thunk vs Saga vs Observable》，当然也期待有同学能够积极分享自己的经验。</p>
+</li>
+<li><p>Immutable.js<br>Immutable.js事实上是和React一起出来的，只是React的光芒掩盖了Immutable.js，直到Redux引入了性能问题，大家才想到了Immutable.js。其实关于Immutable.js也没啥好介绍的，API看官网即可，其实现则可以参考阅读Clojure的数据结构实现。</p>
+</li>
+</ul>
+<h3 id="Reactive-Programming-响应式编程"><a href="#Reactive-Programming-响应式编程" class="headerlink" title="Reactive Programming 响应式编程"></a>Reactive Programming 响应式编程</h3><p>讲FP牵扯到RP很大的原因是因为大多数场景下RP和FP息息相关着。<br>这一块我还欠缺很多，所以暂时不讲太多。</p>
+<ul>
+<li><p>FRP vs F&amp;RP<br>两者区别在于：FRP是基于时间连续的，RP是基于时间离散的。</p>
+</li>
+<li><p>Rx.js<br>Rx不是FRP，而是F&amp;RP，因为Rx并不强调时间的作用，只是借助了函数式编程的一些思想让API变得更加优雅。<br>为什么我们会需要Rx.js呢？推荐阅读《单页应用的数据流方案探索》</p>
+</li>
+<li><p>Cycle.js<br>循环依赖问题<br>函数不动点模型</p>
+</li>
+<li><p>Elm<br>受Haskell影响<br>影响了Redux</p>
+</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><ul>
+<li><a href="http://johnhax.net/2017/stc-vs-ptc/#0" target="_blank" rel="noopener">STC vs PTC</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26941235" target="_blank" rel="noopener">[译]All About Recursion, PTC, TCO and STC in JavaScript</a></li>
+</ul>
+<h2 id="惰性求值"><a href="#惰性求值" class="headerlink" title="惰性求值"></a>惰性求值</h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/26535479" target="_blank" rel="noopener">如何用 JavaScript 实现一个数组惰性求值库</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26587745" target="_blank" rel="noopener">js中的Stream实现</a></li>
+</ul>
+<h2 id="CQRS"><a href="#CQRS" class="headerlink" title="CQRS"></a>CQRS</h2><ul>
+<li><a href="https://martinfowler.com/bliki/CQRS.html" target="_blank" rel="noopener">CQRS</a></li>
+<li><a href="https://github.com/reactjs/redux/issues/351" target="_blank" rel="noopener">Redux and it’s relation to CQRS (and other things)</a></li>
+<li><a href="https://www.slideshare.net/ktoso/akka-persistence-event-sourcing-in-30-minutes" target="_blank" rel="noopener">Akka persistence == event sourcing in 30 minutes</a></li>
+</ul>
+<h2 id="Redux异步解决方案"><a href="#Redux异步解决方案" class="headerlink" title="Redux异步解决方案"></a>Redux异步解决方案</h2><ul>
+<li><a href="http://slides.com/dabit3/deck-11-12#/" target="_blank" rel="noopener">Redux Thunk vs Saga vs Observable</a></li>
+</ul>
+<h2 id="不可变数据"><a href="#不可变数据" class="headerlink" title="不可变数据"></a>不可变数据</h2><ul>
+<li><a href="https://www.zhihu.com/question/53804334" target="_blank" rel="noopener">函数式编程所倡导使用的「不可变数据结构」如何保证性能？</a></li>
+<li><a href="http://hypirion.com/musings/understanding-persistent-vector-pt-1" target="_blank" rel="noopener">Understanding Clojure’s Persistent Vectors, pt. 1</a></li>
+<li><a href="http://hypirion.com/musings/understanding-persistent-vector-pt-2" target="_blank" rel="noopener">Understanding Clojure’s Persistent Vectors, pt. 2</a></li>
+<li><a href="http://hypirion.com/musings/understanding-persistent-vector-pt-3" target="_blank" rel="noopener">Understanding Clojure’s Persistent Vectors, pt. 3</a></li>
+</ul>
+<h2 id="Rx"><a href="#Rx" class="headerlink" title="Rx"></a>Rx</h2><ul>
+<li><a href="https://github.com/ReactiveX/reactivex.github.io/issues/130" target="_blank" rel="noopener">Clarify the differences between Functional Reactive Programming and Reactive Extensions</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/23331432" target="_blank" rel="noopener">Hello RxJS</a></li>
+</ul>
+<h2 id="综合"><a href="#综合" class="headerlink" title="综合"></a>综合</h2><ul>
+<li><a href="https://www.zhihu.com/question/59871249/answer/170400954" target="_blank" rel="noopener">前端开发js函数式编程真实用途体现在哪里？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/24076438" target="_blank" rel="noopener">为什么说 JavaScript 不擅长函数式编程</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/26426054" target="_blank" rel="noopener">单页应用的数据流方案探索</a></li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/FP/">FP</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/FP/">FP</a><a href="/tags/React/">React</a><a href="/tags/Redux/">Redux</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2022 DaraW
+    
+  </p>
+</footer>
+    
+    
+  </div>
+</div>
+</body>
+</html>
