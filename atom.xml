@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>技术感悟</title>
   
-  <subtitle>个人感悟</subtitle>
+  <subtitle>技术感悟</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="sunjiayue.com/"/>
@@ -42,9 +42,9 @@
       <category term="前端" scheme="sunjiayue.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="React" scheme="sunjiayue.com/tags/React/"/>
-    
       <category term="Taro" scheme="sunjiayue.com/tags/Taro/"/>
+    
+      <category term="React" scheme="sunjiayue.com/tags/React/"/>
     
       <category term="GMTC" scheme="sunjiayue.com/tags/GMTC/"/>
     
@@ -72,9 +72,9 @@
       <category term="前端" scheme="sunjiayue.com/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="React" scheme="sunjiayue.com/tags/React/"/>
-    
       <category term="Taro" scheme="sunjiayue.com/tags/Taro/"/>
+    
+      <category term="React" scheme="sunjiayue.com/tags/React/"/>
     
   </entry>
   
@@ -257,9 +257,9 @@
       <category term="FP" scheme="sunjiayue.com/categories/FP/"/>
     
     
-      <category term="FP" scheme="sunjiayue.com/tags/FP/"/>
-    
       <category term="React" scheme="sunjiayue.com/tags/React/"/>
+    
+      <category term="FP" scheme="sunjiayue.com/tags/FP/"/>
     
       <category term="Redux" scheme="sunjiayue.com/tags/Redux/"/>
     
