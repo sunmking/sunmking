@@ -11,15 +11,6 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/2017/08/16/fp-with-fe/</loc>
-    
-    <lastmod>2022-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>sunjiayue.com/2020/03/25/bv-av-idgen/</loc>
     
     <lastmod>2022-03-18</lastmod>
@@ -38,25 +29,25 @@
   </url>
   
   <url>
+    <loc>sunjiayue.com/2016/11/24/intellij-idea-ugly-font-linux/</loc>
+    
+    <lastmod>2022-03-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/2017/08/16/fp-with-fe/</loc>
+    
+    <lastmod>2022-03-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>sunjiayue.com/2016/04/22/git-commit-name-change/</loc>
-    
-    <lastmod>2022-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/2021/08/06/gmtc-beijing-2021-mp/</loc>
-    
-    <lastmod>2022-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/2017/03/23/goodbye-duoshuo/</loc>
     
     <lastmod>2022-03-18</lastmod>
     
@@ -74,7 +65,25 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/2016/11/24/intellij-idea-ugly-font-linux/</loc>
+    <loc>sunjiayue.com/2016/11/11/notes-about-node-thunkify/</loc>
+    
+    <lastmod>2022-03-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/2017/02/19/notes-about-you-dont-know-js-settimeout-this/</loc>
+    
+    <lastmod>2022-03-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/2016/02/12/queue-several-functions-set-by-timeout/</loc>
     
     <lastmod>2022-03-18</lastmod>
     
@@ -92,7 +101,7 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/2016/11/11/notes-about-node-thunkify/</loc>
+    <loc>sunjiayue.com/2021/08/06/gmtc-beijing-2021-mp/</loc>
     
     <lastmod>2022-03-18</lastmod>
     
@@ -119,7 +128,7 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/2016/02/12/queue-several-functions-set-by-timeout/</loc>
+    <loc>sunjiayue.com/2018/09/07/video-quality-monitor/</loc>
     
     <lastmod>2022-03-18</lastmod>
     
@@ -137,52 +146,7 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/2017/02/19/notes-about-you-dont-know-js-settimeout-this/</loc>
-    
-    <lastmod>2022-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/2016/05/16/table-with-striped-lines/</loc>
-    
-    <lastmod>2022-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/2015/08/31/thoughts-about-drawing-triangle-with-css/</loc>
-    
-    <lastmod>2022-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/2018/09/07/video-quality-monitor/</loc>
-    
-    <lastmod>2022-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>sunjiayue.com/2019/06/12/thrift-rpc-mock/</loc>
-    
-    <lastmod>2022-03-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/2019/12/21/you-dont-know-git/</loc>
     
     <lastmod>2022-03-18</lastmod>
     
@@ -200,7 +164,25 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/about/index.html</loc>
+    <loc>sunjiayue.com/2015/08/31/thoughts-about-drawing-triangle-with-css/</loc>
+    
+    <lastmod>2022-03-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/2019/12/21/you-dont-know-git/</loc>
+    
+    <lastmod>2022-03-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/2016/05/16/table-with-striped-lines/</loc>
     
     <lastmod>2022-03-18</lastmod>
     
@@ -226,6 +208,15 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>sunjiayue.com/about/index.html</loc>
+    
+    <lastmod>2022-03-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   <url>
     <loc>sunjiayue.com</loc>
@@ -237,27 +228,6 @@
   
   <url>
     <loc>sunjiayue.com/tags/gulp/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/FP/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/React/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/Redux/</loc>
     <lastmod>2022-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -292,7 +262,70 @@
   </url>
   
   <url>
+    <loc>sunjiayue.com/tags/Intellij-IDEA/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/Linux/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/FP/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/React/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/Redux/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>sunjiayue.com/tags/git/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/JavaScript/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/thunkify/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/Proxy/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/%E8%84%8F%E5%80%BC%E6%A3%80%E6%B5%8B/</loc>
     <lastmod>2022-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -320,70 +353,7 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/tags/%E5%A4%9A%E8%AF%B4/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/JavaScript/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/Intellij-IDEA/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/Linux/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/Proxy/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/%E8%84%8F%E5%80%BC%E6%A3%80%E6%B5%8B/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/thunkify/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>sunjiayue.com/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/css/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>sunjiayue.com/tags/CSS/</loc>
     <lastmod>2022-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -432,6 +402,20 @@
   </url>
   
   <url>
+    <loc>sunjiayue.com/tags/Vue-js/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/tags/CSS/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>sunjiayue.com/tags/Git/</loc>
     <lastmod>2022-09-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -446,7 +430,7 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/tags/Vue-js/</loc>
+    <loc>sunjiayue.com/tags/css/</loc>
     <lastmod>2022-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -462,13 +446,6 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/categories/FP/</loc>
-    <lastmod>2022-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>sunjiayue.com/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2022-09-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -476,7 +453,14 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/categories/%E5%89%8D%E7%AB%AF/ES6/</loc>
+    <loc>sunjiayue.com/categories/Linux/</loc>
+    <lastmod>2022-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>sunjiayue.com/categories/FP/</loc>
     <lastmod>2022-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -497,7 +481,7 @@
   </url>
   
   <url>
-    <loc>sunjiayue.com/categories/Linux/</loc>
+    <loc>sunjiayue.com/categories/%E5%89%8D%E7%AB%AF/ES6/</loc>
     <lastmod>2022-09-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

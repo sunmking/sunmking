@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>DaraW</title>
+  <title>技术感悟</title>
   
-  <subtitle>Code is Poetry</subtitle>
+  <subtitle>个人感悟</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="sunjiayue.com/"/>
@@ -10,7 +10,7 @@
   <id>sunjiayue.com/</id>
   
   <author>
-    <name>DaraW</name>
+    <name>clyde-cn</name>
     
   </author>
   
@@ -262,30 +262,6 @@
       <category term="React" scheme="sunjiayue.com/tags/React/"/>
     
       <category term="Redux" scheme="sunjiayue.com/tags/Redux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>多说一句再见</title>
-    <link href="sunjiayue.com/2017/03/23/goodbye-duoshuo/"/>
-    <id>sunjiayue.com/2017/03/23/goodbye-duoshuo/</id>
-    <published>2017-03-23T12:01:15.000Z</published>
-    <updated>2022-03-18T03:43:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>因公司业务调整，非常遗憾的向大家宣布多说项目即将关闭。 我们将于2017年6月1日正式关停服务，在此之前您可以通过后台的数据导出功能导出自己站点的评论数据。 对此给您造成的不便，我们深表歉意，感谢您的一路相伴。</p></blockquote><p>从博客搭建好以来一直使用着多说作为评论系统，虽然多说有着不少的黑点，比如上了HTTPS后失去地址栏绿锁，也听说过多说有各种各样的bug，服务器故障导致评论框不出现更是没少见过，不过以后再也不能黑多说了。  </p><a id="more"></a><p>由于不是很想再去使用国内其他的评论系统了，博客近期也没有迁移到非静态的博客系统的计划，所以把评论系统换成了Disqus。至于GFW的问题，我觉得科学上网是一个程序员必备的技能，Disqus被墙不应该会影响本博客的访客们。  </p><p>另外可能是多说导出数据的格式的问题，在迁移到Disqus的过程中一直没法把转好的数据导入Disqus，所以很遗憾以前的评论都丢失了，最近也比较忙，过阵子闲下来我再尝试看看能不能把数据找回来。  </p><p>感谢多说这一年半的陪伴，也感谢曾经在博客留言的朋友们。<br>如果可以，我还是很乐意为多说团队买一杯咖啡的。  </p><p>最后，再多说一句再见！</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;因公司业务调整，非常遗憾的向大家宣布多说项目即将关闭。 我们将于2017年6月1日正式关停服务，在此之前您可以通过后台的数据导出功能导出自己站点的评论数据。 对此给您造成的不便，我们深表歉意，感谢您的一路相伴。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;从博客搭建好以来一直使用着多说作为评论系统，虽然多说有着不少的黑点，比如上了HTTPS后失去地址栏绿锁，也听说过多说有各种各样的bug，服务器故障导致评论框不出现更是没少见过，不过以后再也不能黑多说了。  &lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="多说" scheme="sunjiayue.com/tags/%E5%A4%9A%E8%AF%B4/"/>
     
   </entry>
   
@@ -542,6 +518,29 @@
     
     
       <category term="JavaScript" scheme="sunjiayue.com/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gulp构建中del的一个小坑</title>
+    <link href="sunjiayue.com/2016/02/12/a-problem-about-gulp-del/"/>
+    <id>sunjiayue.com/2016/02/12/a-problem-about-gulp-del/</id>
+    <published>2016-02-12T04:55:15.000Z</published>
+    <updated>2022-03-18T03:43:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>grunt，gulp以及webpack三个常见构建工具的对比和介绍已经很多了，这里就不再赘述。手上这个项目用了gulp进行构建，同时也是我刚刚入门学习使用gulp构建。</p><a id="more"></a><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在写<code>gulpfile.js</code>的task时，一开始我是这么写的：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">'clean'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    del([<span class="string">'typing.min.js'</span>], cb);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'build'</span>, [<span class="string">'clean'</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    gulp.src(<span class="string">'typing.js'</span>)</span><br><span class="line">        .pipe(uglify())</span><br><span class="line">        .pipe(rename(<span class="string">'typing.min.js'</span>))</span><br><span class="line">        .pipe(gulp.dest(<span class="string">''</span>));</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'clean'</span>, <span class="string">'build'</span>]);</span><br></pre></td></tr></table></figure><p>在<code>shell</code>里执行</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br></pre></td></tr></table></figure><p>或者是</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp build</span><br></pre></td></tr></table></figure><p>始终只进行了<code>clean</code>任务而不<code>build</code>，对着API和一些介绍gulp的文章，怎么都找不到问题所在。  </p><h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>接着搜到了一句话：</p><blockquote><p>Make sure to return the stream so that gulp knows the clean task is asynchronous and waits for it to terminate before starting the dependent one.</p></blockquote><p>由于del是异步执行的，尝试在<code>clean</code>任务中返回流后就正常了：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">'clean'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> del([<span class="string">'typing.min.js'</span>], cb);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>另外在github的del项目的<a href="https://github.com/sindresorhus/del/issues/50" target="_blank" rel="noopener">issues</a>中看到一个哥们提供的解决方案，其中一个是返回流，另一个则是常见的解决方案：回调。</p><h2 id="构建的其他方案"><a href="#构建的其他方案" class="headerlink" title="构建的其他方案"></a>构建的其他方案</h2><p>在学长ChiChou的技术群里，学长告诉我在这种无需大量文件操作的项目中，可以用<code>package.json</code>+<code>Makefile</code>进行构建，甚至可以连这都不用，直接在<code>package.json</code>中的scripts中写入指令，然后<code>npm run xxxx</code>执行。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;grunt，gulp以及webpack三个常见构建工具的对比和介绍已经很多了，这里就不再赘述。手上这个项目用了gulp进行构建，同时也是我刚刚入门学习使用gulp构建。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="前端" scheme="sunjiayue.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="gulp" scheme="sunjiayue.com/tags/gulp/"/>
     
   </entry>
   
