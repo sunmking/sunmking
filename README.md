@@ -17,7 +17,7 @@
 - ❓ Ask me about anything related to network technology  
   
 
-- ⚡ Fun fact: Listen To Music  
+- ⚡ Fun fact: coding
 
 
 </td></tr></table>  
